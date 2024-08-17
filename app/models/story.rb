@@ -363,6 +363,7 @@ class Story < ApplicationRecord
       :created_at,
       :title,
       :url,
+      {merged_urls: merged_stories.map(&:url)},
       :score,
       :score,
       :flags,

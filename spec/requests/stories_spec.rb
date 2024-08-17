@@ -263,6 +263,19 @@ describe "stories", type: :request do
             id: merged_into_story.short_id,
             format: :json)
         end
+
+        context "the a parent story" do
+          it "contains the merged story's URL" do
+            story.save!
+
+            get "/stories/#{merged_into_story.short_id}.json"
+            expect(response).to be_successful
+
+            json = JSON.parse(response.body)
+
+            expect(json.fetch("merged_urls")).to include(story.url)
+          end
+        end
       end
     end
   end
